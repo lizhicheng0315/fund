@@ -1,9 +1,7 @@
 from flask import Flask
-from flask_caching import Cache
 from config import Config
 from models import db
-
-cache = Cache()
+from extensions import cache
 
 
 def create_app():
