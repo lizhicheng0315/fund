@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基金周度涨跌幅</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>基金周度涨跌幅查询</h1>
+
+        <!-- Search bar -->
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="输入基金代码或名称" autocomplete="off">
+            <button id="search-btn">搜索</button>
+            <div id="search-dropdown" class="dropdown hidden"></div>
+        </div>
+
+        <!-- Query conditions -->
+        <div class="query-bar">
+            <label>开始日期 <input type="date" id="start-date"></label>
+            <label>结束日期 <input type="date" id="end-date"></label>
+            <label>基金分类
+                <select id="category-select">
+                    <option value="">全部分类</option>
+                </select>
+            </label>
+            <button id="query-rank-btn">查询排名</button>
+        </div>
+
+        <!-- Result area -->
+        <div id="result-area"></div>
+    </div>
+
+    <script src="/app.js"></script>
+</body>
+</html>
