@@ -1,0 +1,206 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, "Microsoft YaHei", sans-serif;
+    background: #f5f5f5;
+    color: #333;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 24px 16px;
+}
+
+h1 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #1a1a1a;
+}
+
+/* Search bar */
+.search-bar {
+    position: relative;
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.search-bar button {
+    padding: 8px 20px;
+    background: #1677ff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.search-bar button:hover {
+    background: #0958d9;
+}
+
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 72px;
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    max-height: 240px;
+    overflow-y: auto;
+    z-index: 10;
+}
+
+.dropdown.hidden {
+    display: none;
+}
+
+.dropdown-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.dropdown-item:hover {
+    background: #f0f5ff;
+}
+
+.dropdown-item .code {
+    color: #1677ff;
+    margin-right: 12px;
+}
+
+.dropdown-item .category {
+    color: #999;
+    font-size: 12px;
+}
+
+/* Query bar */
+.query-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    padding: 12px;
+    background: #fff;
+    border-radius: 4px;
+    border: 1px solid #e8e8e8;
+}
+
+.query-bar label {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.query-bar input[type="date"],
+.query-bar select {
+    padding: 6px 8px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.query-bar button {
+    padding: 6px 16px;
+    background: #1677ff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Fund info card */
+.fund-card {
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 4px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.fund-card .fund-name {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.fund-card .fund-meta {
+    font-size: 13px;
+    color: #666;
+    margin-top: 4px;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+th, td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+}
+
+th {
+    background: #fafafa;
+    font-weight: 600;
+}
+
+.change-positive {
+    color: #cf1322;
+}
+
+.change-negative {
+    color: #3f8600;
+}
+
+tr.highlight {
+    background: #fff7e6;
+}
+
+/* Chart */
+.chart-container {
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 4px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.chart-container canvas {
+    max-height: 300px;
+}
+
+/* Empty state */
+.empty-state {
+    text-align: center;
+    color: #999;
+    padding: 40px;
+    font-size: 14px;
+}
