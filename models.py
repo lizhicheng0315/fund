@@ -6,14 +6,14 @@ db = SQLAlchemy()
 class FundCategory(db.Model):
     __tablename__ = 'fund_categories'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(50), unique=True, nullable=False)
+    name = db.Column(db.String(100), unique=True, nullable=False)
     funds = db.relationship('Fund', backref='category', lazy='dynamic')
 
 
 class Fund(db.Model):
     __tablename__ = 'funds'
     code = db.Column(db.String(6), primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
+    name = db.Column(db.String(200), nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey('fund_categories.id'))
 
 

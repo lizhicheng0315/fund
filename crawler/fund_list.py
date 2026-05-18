@@ -2,19 +2,64 @@ import re
 import requests
 from models import db, Fund, FundCategory
 
-FUND_LIST_URL = 'https://fund.eastmoney.com/js/fundcode_search.js'
+FUND_TYPES = {
+    'gp': '股票型',
+    'hh': '混合型',
+    'zq': '债券型',
+    'zs': '指数型',
+    'qdii': 'QDII',
+    'fof': 'FOF',
+    'hb': '货币型',
+    'fim': '理财型',
+}
+
+RANK_URL = 'https://fund.eastmoney.com/Data/FundGuideapi.aspx'
 
 
 def fetch_fund_list():
-    """Fetch fund list from eastmoney. Returns list of tuples: (code, name, category_name)."""
-    resp = requests.get(FUND_LIST_URL, timeout=30)
-    resp.encoding = 'utf-8'
-    text = resp.text
+    """Fetch fund list from eastmoney ranking API. Returns list of tuples: (code, name, category_name)."""
+    all_funds = []
+    for ft_code, ft_name in FUND_TYPES.items():
+        page = 1
+        while True:
+            params = {
+                'dt': '0',
+                'ft': ft_code,
+                'sd': '',
+                'ed': '',
+                'sc': 'z',
+                'st': 'desc',
+                'pi': str(page),
+                'pn': '500',
+                'zf': 'diy',
+                'sh': 'list',
+            }
+            resp = requests.get(RANK_URL, params=params, timeout=30)
+            text = resp.content.decode('utf-8')
 
-    # Response format: var r = [["000001","HXCZ","华夏成长","HHGF","混合型"], ...]
-    pattern = r'\["(\d{6})","[^"]*","([^"]*)","[^"]*","([^"]*)"'
-    matches = re.findall(pattern, text)
-    return [(code, name, category) for code, name, category in matches]
+            # Parse datacount and datas
+            count_match = re.search(r'datacount\":\"(\d+)\"', text)
+            total = int(count_match.group(1)) if count_match else 0
+
+            datas_match = re.search(r'datas\":\[(.*?)\]', text)
+            if not datas_match:
+                break
+
+            raw_items = datas_match.group(1).split('","')
+            for item in raw_items:
+                item = item.strip('"')
+                fields = item.split(',')
+                if len(fields) >= 4:
+                    code = fields[0]
+                    name = fields[1]
+                    category = fields[3]
+                    all_funds.append((code, name, category))
+
+            if page * 500 >= total:
+                break
+            page += 1
+
+    return all_funds
 
 
 def sync_fund_list(app):

@@ -3,12 +3,12 @@ USE fund;
 
 CREATE TABLE IF NOT EXISTS fund_categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(50) NOT NULL UNIQUE
+    name VARCHAR(100) NOT NULL UNIQUE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS funds (
     code VARCHAR(6) PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
+    name VARCHAR(200) NOT NULL,
     category_id INT,
     FOREIGN KEY (category_id) REFERENCES fund_categories(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
