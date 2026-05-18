@@ -60,7 +60,7 @@ def start_scheduler(app):
     """Register the weekly incremental crawl job."""
     scheduler.init_app(app)
     scheduler.add_job(
-        incremental_crawl,
+        func=incremental_crawl,
         args=[app],
         trigger='cron',
         id='weekly_incremental_crawl',
